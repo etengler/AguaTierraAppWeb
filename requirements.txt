@@ -1,0 +1,4 @@
+geemap
+requests
+pycrs
+voila
