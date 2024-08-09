@@ -1,4 +1,0 @@
-geemap
-requests
-pycrs
-voila
