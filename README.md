@@ -8,8 +8,6 @@ Fue construido...
 
                                              --- Instalación ---
 
-Seguir el siguiente tutorial: https://github.com/etengler/AguaTierraAppWeb/blob/main/Instalacion%20app%20con%20gee.pdf
-
-
+Seguir el siguiente tutorial: https://github.com/etengler/AguaTierraAppWeb/blob/main/InstalacionAppConGee.pdf
 
 
