@@ -1,4 +1,4 @@
-name: Deploy to Binder
+name: Deploy Voilà App
 
 on:
   push:
