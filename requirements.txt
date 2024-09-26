@@ -1,0 +1,7 @@
+voila
+earthengine-api
+geemap
+ipywidgets
+pandas
+requests
+zmq
