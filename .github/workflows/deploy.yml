@@ -1,29 +1,29 @@
-name: Deploy to Binder
+name: Run Earth Engine Script
 
 on:
   push:
     branches:
-      - main  # Cambia por la rama que desees
+      - main  # O la rama que estés utilizando
 
 jobs:
-  deploy:
+  your_job_name:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.11.9'
+          python-version: '3.11.9'  # O la versión que necesites
 
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
 
-      - name: Set environment variable
+      - name: Set up GEE credentials
         run: |
-          echo "GCP_SERVICE_ACCOUNT=${{ secrets.GCP_SERVICE_ACCOUNT }}" >> $GITHUB_ENV
+          echo "${{ secrets.GCP_SERVICE_ACCOUNT }}" > service_account.json
 
-      - name: Launch Voilà
-        run: voila --port=8888 --no-browser --enable_nbextensions=True --show_tracebacks=True
+
+
