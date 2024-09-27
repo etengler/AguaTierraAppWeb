@@ -1,32 +1,29 @@
-name: CI/CD for my project
+name: Deploy application
 
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.11.6'
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11.9'
 
-    - name: Install dependencies
-      run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-    - name: Set environment variable for GCP service account
-      env:
-        GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-      run: |
-        echo "GCP_SERVICE_ACCOUNT is set"
-        echo "${{ secrets.GCP_SERVICE_ACCOUNT }}" > credentials.json
-
-
-
+      - name: Set environment variable for GCP service account
+        env:
+          GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+        run: |
+          echo "GCP_SERVICE_ACCOUNT set"
+          echo "${{ secrets.GCP_SERVICE_ACCOUNT }}" > credentials.json
