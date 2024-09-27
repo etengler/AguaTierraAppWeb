@@ -1,39 +1,31 @@
-name: Deploy Voilà App
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - main  # Se ejecuta cuando hay un push en la rama main
+
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.11.9'
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11.9'
 
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
 
-    - name: Set environment variable for GCP service account
-      env:
-        GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-      run: |
-        echo "${{ secrets.GCP_SERVICE_ACCOUNT }}" > credentials.json
+      - name: Set environment variable for GCP service account
+        run: echo "GCP_SERVICE_ACCOUNT=${{ secrets.GCP_SERVICE_ACCOUNT }}" >> $GITHUB_ENV
 
-    - name: Run Voilà app
-      run: voila AguaTierra.ipynb --no-browser --port=8888
-
-    - name: Publish Voilà to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./  # Directorio donde Voilà guarda los archivos
-
+      - name: Run Voilà app
+        run: |
+          voila AguaTierra.ipynb --no-browser --port=8888
